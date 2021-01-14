@@ -3,11 +3,12 @@
 namespace App\Models\Tenant;
 
 use Hyn\Tenancy\Traits\UsesTenantConnection;
-use Illuminate\Database\Eloquent\Model;
+use Laravel\Passport\HasApiTokens;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Model
+class User extends Authenticatable
 {
-    use UsesTenantConnection;
+    use UsesTenantConnection, HasApiTokens;
 
     /**
      * The attributes that are mass assignable.

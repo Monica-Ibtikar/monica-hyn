@@ -2,8 +2,17 @@
 
 namespace App\Providers;
 
+use App\Models\Tenant\Passport\AuthCode;
+use App\Models\Tenant\Passport\Client;
+use App\Models\Tenant\Passport\PersonalAccessClient;
+use App\Models\Tenant\Passport\RefreshToken;
+use App\Models\Tenant\Passport\Token;
+use Hyn\Tenancy\Environment;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Gate;
+use Laravel\Passport\Console\ClientCommand;
+use Laravel\Passport\Console\InstallCommand;
+use Laravel\Passport\Console\KeysCommand;
+use Laravel\Passport\Passport;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -25,6 +34,13 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        if(app(Environment::class)->tenant()){
+            Passport::useTokenModel(Token::class);
+            Passport::useClientModel(Client::class);
+            Passport::useAuthCodeModel(AuthCode::class);
+            Passport::usePersonalAccessClientModel(PersonalAccessClient::class);
+            Passport::useRefreshTokenModel(RefreshToken::class);
+        }
+        Passport::routes();
     }
 }

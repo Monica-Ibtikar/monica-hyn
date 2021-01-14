@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Models\System\Client;
 use App\Services\CreateTenantService;
+use Illuminate\Support\Facades\Artisan;
 
 class ClientObserver
 {
