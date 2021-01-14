@@ -24,4 +24,9 @@ class AbstractGenericRepository implements GenericRepositoryInterface
     {
         $this->model::create($attributes);
     }
+
+    public function first(array $attributes)
+    {
+        return $this->model::where($attributes)->first();
+    }
 }

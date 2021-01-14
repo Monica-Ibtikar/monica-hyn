@@ -12,4 +12,5 @@ namespace App\Repositories\Contracts;
 interface GenericRepositoryInterface
 {
     public function store(array $attributes);
+    public function first(array $attributes);
 }
