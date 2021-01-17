@@ -8,13 +8,10 @@
 
 namespace App\Services;
 
-
 use App\Repositories\Contracts\PassportClientRepositoryInterface;
 use App\Repositories\Contracts\UserRepositoryInterface;
-use Hyn\Tenancy\Environment;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
-use GuzzleHttp\Client as GuzzleClient;
 use Laravel\Passport\Http\Controllers\AccessTokenController;
 
 class UserService
