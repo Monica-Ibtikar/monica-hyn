@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\ErrorResource;
 use App\Services\UserService;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Psr\Http\Message\ServerRequestInterface;
 
 class AuthController extends Controller
@@ -15,7 +16,7 @@ class AuthController extends Controller
         try {
             return $userService->callPassortToken($request->only(["email", "password"]), $serverRequest);
         } catch (\Exception $exception) {
-            return new ErrorResource($exception->getCode(), $exception->getMessage());
+            return new ErrorResource(Response::HTTP_UNAUTHORIZED, $exception->getMessage());
         }
 
     }
