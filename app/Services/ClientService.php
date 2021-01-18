@@ -24,4 +24,9 @@ class ClientService
     {
         $this->clientRepo->store($attributes);
     }
+
+    public function updateProductsCount($websiteId, $productCount)
+    {
+        $this->clientRepo->update(["website_id" => $websiteId], ["product_count" => $productCount]);
+    }
 }
