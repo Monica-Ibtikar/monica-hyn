@@ -18,7 +18,7 @@ class ProductObserver
 
     public function created(Product $product)
     {
-        $productCount = $this->productRepository->all()->count();
+        $productCount = $this->productRepository->count();
         $websiteId = app(Environment::class)->tenant()->id;
         IncrementProductCount::dispatch($productCount, $websiteId);
     }

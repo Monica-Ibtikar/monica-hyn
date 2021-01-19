@@ -18,7 +18,7 @@ class ProductResource extends JsonResource
             "id" => $this->id,
             "sku" => $this->sku,
             "name" => $this->name,
-            "image" => $this->image,
+            "image" => config("app.url").$this->image,
             "variations" => VariationResource::collection($this->variations)
         ];
     }

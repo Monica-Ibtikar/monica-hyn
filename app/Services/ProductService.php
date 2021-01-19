@@ -34,8 +34,8 @@ class ProductService
         $path = $storageDisk
             ->putFileAs($directory, $image, $productId.'.'.$image->extension()); // products/1/1.jpg
         $websiteUuid =  $website   = app(Environment::class)->tenant()->uuid;
-        $fullPath = config('app.url')."/storage/$websiteUuid/".$path;
-        $this->productRepo->update(["id" => $productId], ['image'=> $fullPath]);
+        $relativePath = Storage::url("$websiteUuid/$path");
+        $this->productRepo->update(["id" => $productId], ['image'=> $relativePath]);
     }
 
     protected function deleteOldImages($storageDisk, $directory)

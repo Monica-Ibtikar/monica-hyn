@@ -21,9 +21,6 @@ class AttributeController extends Controller
     public function store(StoreAttribute $request)
     {
         $attributeData = $request->input();
-        $attributeData["variations"] = array_map(function ($variation){
-            return ["name" => $variation];
-        }, $attributeData["variations"]);
         $this->attributeService->store($attributeData);
         return new SuccessResource(Response::HTTP_CREATED);
     }

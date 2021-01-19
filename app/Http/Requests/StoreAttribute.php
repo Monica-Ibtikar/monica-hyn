@@ -26,7 +26,7 @@ class StoreAttribute extends FormRequest
         return [
             "name" => "required|unique:tenant.attributes,name",
             "variations" => "required|array",
-            "variations.*" => "required"
+            "variations.*.name" => "required"
         ];
     }
 }

@@ -16,7 +16,12 @@ class ProductRepository extends AbstractGenericRepository implements ProductRepo
 {
     public function store(array $attributes)
     {
-        $product = parent::store(Arr::except($attributes, 'variation_ids'));
+        $product = parent::store($attributes);
         $product->variations()->sync($attributes['variation_ids']);
+    }
+
+    public function count()
+    {
+        return $this->model::count();
     }
 }

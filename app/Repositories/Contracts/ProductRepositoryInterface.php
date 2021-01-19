@@ -12,4 +12,5 @@ namespace App\Repositories\Contracts;
 interface ProductRepositoryInterface extends GenericRepositoryInterface
 {
     public function store(array $attributes);
+    public function count();
 }

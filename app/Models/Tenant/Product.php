@@ -4,12 +4,13 @@ namespace App\Models\Tenant;
 
 use Hyn\Tenancy\Traits\UsesTenantConnection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
-    use UsesTenantConnection;
+    use UsesTenantConnection, SoftDeletes;
 
-    protected $guarded = [];
+    protected $fillable = ["sku", "name", "image"];
 
     /**
      * The relationships that should always be loaded.
