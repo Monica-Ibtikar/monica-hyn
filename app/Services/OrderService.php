@@ -65,7 +65,7 @@ class OrderService
     public function paginateAndFilter(array $query)
     {
         $where = [];
-        if($query["status"]) {
+        if(array_key_exists("status", $query)) {
             $status = Status::coerce($query["status"]);
             $query["status"] = optional($status)->value;
         }
