@@ -9,6 +9,9 @@ Route::prefix('api')->namespace($namespace)->group(function () {
     Route::apiResource('users', 'UserController')->only('store');
     Route::apiResource('attributes', 'AttributeController')->only(['store', 'index']);
     Route::apiResource('products', 'ProductController')->only(['store', 'index']);
+    Route::apiResource('products.inventories', 'ProductInventoryController')->only(['store', 'index']);
+    Route::apiResource('orders', 'OrderController')->only(['store', 'index']);
     Route::post('login', 'AuthController@login');
     Route::post('products/{id}/upload-image','ProductController@uploadImage');
+    Route::get('products/inventories','ProductController@indexWithInventory');
 });

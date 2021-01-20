@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Tenant;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProduct;
 use App\Http\Requests\UploadImage;
+use App\Http\Resources\ProductInventoryResource;
 use App\Http\Resources\ProductResource;
 use App\Http\Resources\SuccessResource;
 use App\Services\ProductService;
@@ -26,7 +27,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = $this->productService->index();
+        $products = $this->productService->indexProducts();
         return ProductResource::collection($products);
     }
 
@@ -53,5 +54,16 @@ class ProductController extends Controller
     {
         $this->productService->uploadImage($request->file('image'), $id);
         return new SuccessResource(Response::HTTP_OK);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     */
+    public function indexWithInventory()
+    {
+        $products = $this->productService->indexWithInventory();
+        return ProductInventoryResource::collection($products);
     }
 }

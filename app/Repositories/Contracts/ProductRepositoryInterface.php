@@ -13,4 +13,9 @@ interface ProductRepositoryInterface extends GenericRepositoryInterface
 {
     public function store(array $attributes);
     public function count();
+    public function createInventory($product, $quantity);
+    public function updateInventory($product, $quantity, $attribute = "available");
+    public function getProductsWithVariations();
+    public function paginateProductsWithInventory();
+    public function getProductsByIds(array $ids);
 }

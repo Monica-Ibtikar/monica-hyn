@@ -2,9 +2,7 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
-
-class StoreProduct extends FormRequest
+class StoreProduct extends CommonRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,7 +24,8 @@ class StoreProduct extends FormRequest
         return [
             'sku' => 'required|unique:tenant.products,sku',
             'name' => 'required',
-            'variation_ids' => 'required|array',
+            'price' => 'required|numeric',
+            'variation_ids' => $this->requiredArrayRules,
             'variation_ids.*' => 'required|exists:tenant.variations,id'
         ];
     }

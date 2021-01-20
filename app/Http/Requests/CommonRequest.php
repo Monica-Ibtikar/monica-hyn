@@ -2,9 +2,17 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Foundation\Http\FormRequest;
 
-class StoreAttribute extends CommonRequest
+class CommonRequest extends FormRequest
 {
+    protected $requiredArrayRules;
+
+    public function __construct()
+    {
+        $this->requiredArrayRules = ['required', 'array'];
+    }
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -23,9 +31,7 @@ class StoreAttribute extends CommonRequest
     public function rules()
     {
         return [
-            "name" => "required|unique:tenant.attributes,name",
-            "variations" => $this->requiredArrayRules,
-            "variations.*.name" => "required"
+            //
         ];
     }
 }
