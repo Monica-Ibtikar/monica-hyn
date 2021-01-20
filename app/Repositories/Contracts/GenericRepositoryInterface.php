@@ -13,4 +13,6 @@ interface GenericRepositoryInterface
 {
     public function store(array $attributes);
     public function first(array $attributes);
+    public function update(array $where, array $attributes);
+    public function all();
 }

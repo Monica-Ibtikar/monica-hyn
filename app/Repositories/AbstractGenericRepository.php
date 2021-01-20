@@ -22,11 +22,21 @@ class AbstractGenericRepository implements GenericRepositoryInterface
 
     public function store(array $attributes)
     {
-        $this->model::create($attributes);
+        return $this->model::create($attributes);
     }
 
     public function first(array $attributes)
     {
         return $this->model::where($attributes)->first();
+    }
+
+    public function update(array $where, array $attributes)
+    {
+        $this->model::where($where)->update($attributes);
+    }
+
+    public function all()
+    {
+        return $this->model::all();
     }
 }

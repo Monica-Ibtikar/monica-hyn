@@ -3,13 +3,20 @@
 namespace App\Providers;
 
 use App\Models\System\Client;
+use App\Models\Tenant\Attribute;
+use App\Models\Tenant\Product;
 use App\Models\Tenant\User;
 use App\Observers\ClientObserver;
+use App\Observers\ProductObserver;
+use App\Repositories\AttributeRepository;
 use App\Repositories\ClientRepository;
+use App\Repositories\Contracts\AttributeRepositoryInterface;
 use App\Repositories\Contracts\ClientRepositoryInterface;
 use App\Repositories\Contracts\PassportClientRepositoryInterface;
+use App\Repositories\Contracts\ProductRepositoryInterface;
 use App\Repositories\Contracts\UserRepositoryInterface;
 use App\Repositories\PassportClientRepository;
+use App\Repositories\ProductRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Passport\Passport;
@@ -35,6 +42,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Client::observe(ClientObserver::class);
+        Product::observe(ProductObserver::class);
         $this->app->bind(ClientRepositoryInterface::class, function ($app) {
             return new ClientRepository(Client::class);
         });
@@ -43,6 +51,12 @@ class AppServiceProvider extends ServiceProvider
         });
         $this->app->bind(PassportClientRepositoryInterface::class, function ($app) {
             return new PassportClientRepository(PassportClient::class);
+        });
+        $this->app->bind(AttributeRepositoryInterface::class, function ($app) {
+            return new AttributeRepository(Attribute::class);
+        });
+        $this->app->bind(ProductRepositoryInterface::class, function ($app) {
+            return new ProductRepository(Product::class);
         });
     }
 }
