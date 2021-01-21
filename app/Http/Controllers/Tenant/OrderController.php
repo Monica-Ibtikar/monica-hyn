@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Tenant;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreOrder;
+use App\Http\Resources\ErrorResource;
 use App\Http\Resources\OrderResource;
 use App\Http\Resources\SuccessResource;
 use App\Services\OrderService;
@@ -36,13 +37,12 @@ class OrderController extends Controller
      * Store a newly created resource in storage.
      *
      * @param StoreOrder|Request $request
-     * @return SuccessResource
+     * @return ErrorResource|SuccessResource
      */
     public function store(StoreOrder $request)
     {
-        $order = $this->orderService->createOrder($request->input());
-        return new SuccessResource(Response::HTTP_CREATED, "Order has been created successfully",
-            new OrderResource($order));
+        $this->orderService->createOrder($request->input());
+        return new SuccessResource(Response::HTTP_CREATED, "Order has been created successfully");
     }
 
 }

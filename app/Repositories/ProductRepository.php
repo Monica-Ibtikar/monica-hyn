@@ -31,8 +31,9 @@ class ProductRepository extends AbstractGenericRepository implements ProductRepo
 
     public function updateInventory($product, $quantity, $attribute = "available")
     {
-       $product->inventory->$attribute += $quantity;
-       $product->inventory->save();
+        $product->inventory->lockForUpdate();
+        $product->inventory->$attribute += $quantity;
+        $product->inventory->save();
     }
 
     public function getProductsWithVariations()

@@ -15,4 +15,5 @@ interface OrderRepositoryInterface extends GenericRepositoryInterface
 {
     public function syncProducts(Order $order, array $products);
     public function paginateAndFilter(array $query);
+    public function store(array $attributes);
 }

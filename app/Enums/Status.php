@@ -5,13 +5,13 @@ namespace App\Enums;
 use BenSampo\Enum\Enum;
 
 /**
- * @method static static New()
- * @method static static Completed()
- * @method static static Cancelled()
+ * @method static static NEW()
+ * @method static static COMPLETED()
+ * @method static static CANCELLED()
  */
 final class Status extends Enum
 {
-    const New =   0;
-    const Completed =   1;
-    const Cancelled = 2;
+    const NEW =   0;
+    const COMPLETED =   1;
+    const CANCELLED = 2;
 }
