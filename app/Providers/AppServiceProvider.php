@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\System\Client;
 use App\Models\Tenant\Attribute;
+use App\Models\Tenant\Order;
 use App\Models\Tenant\Product;
 use App\Models\Tenant\User;
 use App\Observers\ClientObserver;
@@ -12,9 +13,11 @@ use App\Repositories\AttributeRepository;
 use App\Repositories\ClientRepository;
 use App\Repositories\Contracts\AttributeRepositoryInterface;
 use App\Repositories\Contracts\ClientRepositoryInterface;
+use App\Repositories\Contracts\OrderRepositoryInterface;
 use App\Repositories\Contracts\PassportClientRepositoryInterface;
 use App\Repositories\Contracts\ProductRepositoryInterface;
 use App\Repositories\Contracts\UserRepositoryInterface;
+use App\Repositories\OrderRepository;
 use App\Repositories\PassportClientRepository;
 use App\Repositories\ProductRepository;
 use App\Repositories\UserRepository;
@@ -57,6 +60,9 @@ class AppServiceProvider extends ServiceProvider
         });
         $this->app->bind(ProductRepositoryInterface::class, function ($app) {
             return new ProductRepository(Product::class);
+        });
+        $this->app->bind(OrderRepositoryInterface::class, function ($app) {
+            return new OrderRepository(Order::class);
         });
     }
 }

@@ -10,7 +10,6 @@ namespace App\Repositories;
 
 
 use App\Repositories\Contracts\ProductRepositoryInterface;
-use Illuminate\Support\Arr;
 
 class ProductRepository extends AbstractGenericRepository implements ProductRepositoryInterface
 {
@@ -23,5 +22,33 @@ class ProductRepository extends AbstractGenericRepository implements ProductRepo
     public function count()
     {
         return $this->model::count();
+    }
+
+    public function createInventory($product, $quantity)
+    {
+        $product->inventory()->create(["available" => $quantity]);
+    }
+
+    public function updateInventory($product, $quantity, $attribute = "available")
+    {
+        $product->inventory->lockForUpdate();
+        $product->inventory->$attribute += $quantity;
+        $product->inventory->save();
+    }
+
+    public function getProductsWithVariations()
+    {
+        return $this->model::with('variations')->get();
+    }
+
+    public function paginateProductsWithInventory()
+    {
+        return $this->model::with('inventory')->paginate();
+    }
+
+    public function getProductsByIds(array $ids)
+    {
+        $products = $this->model::with('inventory')->whereIn("id", $ids)->get();
+        return $products;
     }
 }

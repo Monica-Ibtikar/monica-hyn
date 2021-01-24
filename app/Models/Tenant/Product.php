@@ -10,17 +10,20 @@ class Product extends Model
 {
     use UsesTenantConnection, SoftDeletes;
 
-    protected $fillable = ["sku", "name", "image"];
-
-    /**
-     * The relationships that should always be loaded.
-     *
-     * @var array
-     */
-    protected $with = ['variations'];
+    protected $fillable = ["sku", "name", "image", "price"];
 
     public function variations()
     {
         return $this->belongsToMany(Variation::class)->withTimestamps();
+    }
+
+    public function inventory()
+    {
+        return $this->hasOne(Inventory::class);
+    }
+
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class)->withPivot('quantity')->withTimestamps();
     }
 }
